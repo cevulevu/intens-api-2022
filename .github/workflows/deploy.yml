@@ -51,5 +51,5 @@ jobs:
           inlineScript: |
             az containerapp update \
               --name intens-api \
-              --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+              --resource-group intens-api-rg \
               --image ${{ secrets.DOCKERHUB_USERNAME }}/intens-api:${{ github.sha }}
