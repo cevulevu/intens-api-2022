@@ -46,8 +46,10 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       
       - name: Update Azure Container App
-        uses: azure/container-apps-deploy-action@v2
+        uses: azure/CLI@v2
         with:
-          containerAppName: intens-api
-          resourceGroup: ${{ secrets.AZURE_RESOURCE_GROUP }}
-          imageToDeploy: ${{ secrets.DOCKERHUB_USERNAME }}/intens-api:${{ github.sha }}
+          inlineScript: |
+            az containerapp update \
+              --name intens-api \
+              --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+              --image ${{ secrets.DOCKERHUB_USERNAME }}/intens-api:${{ github.sha }}
